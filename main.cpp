@@ -22,7 +22,7 @@ const char * INPUT_ERROR_STRING = "Input error! Please try again.";
 void playGame();
 
 int getSecretPhrase(char secretPhrase[], int maxLength);
-char * makeHiddenPhrase(const char* secretPhrase, int secretPhraseLength);
+char * makeHiddenPhrase(const char * secretPhrase, int secretPhraseLength);
 
 void drawBoard(int numberOfGuessesLeft, const char * optrHiddenPhrase);
 
@@ -33,6 +33,9 @@ char getGuess();
 void updateBoard(char guess, char * noptrHiddenPhrase, const char secretPhrase[], int secretPhraseLength, int & numberOfGuessesLeft);
 
 void displayResult(const char * secretPhrase, int numberOfGuessesLeft);
+
+void clearScreen();
+void waitForKeyPress();
 
 int main(int argc, const char * argv[]) {
 
@@ -60,9 +63,11 @@ void playGame() {
   char guess;
 
   do {
+
     guess = getGuess();
     updateBoard(guess, optrHiddenPhrase, secretPhrase, secretPhraseLength, numberOfGuessesLeft);
     drawBoard(numberOfGuessesLeft, optrHiddenPhrase);
+
   } while(!isGameOver(numberOfGuessesLeft, optrHiddenPhrase, secretPhraseLength));
 
   displayResult(secretPhrase, numberOfGuessesLeft);
@@ -72,6 +77,8 @@ void playGame() {
 }
 
 void drawBoard(int numberOfGuessesLeft, const char * optrHiddenPhrase) {
+  clearScreen();
+
   switch(numberOfGuessesLeft) {
     case 0: {
       cout << " +---+"   << endl;
@@ -151,7 +158,7 @@ void drawBoard(int numberOfGuessesLeft, const char * optrHiddenPhrase) {
 }
 
 
-char * makeHiddenPhrase(const char* secretPhrase, int secretPhraseLength) {
+char * makeHiddenPhrase(const char * secretPhrase, int secretPhraseLength) {
   char* hiddenPhrase = new char[secretPhraseLength + 1];
   for (int i = 0; i < secretPhraseLength; i++) {
     if (secretPhrase[i] != ' ') {
@@ -195,7 +202,7 @@ int getSecretPhrase(char secretPhrase[], int maxLength){
 
 }
 
-char getCharacter(const char *prompt, const char* error) { //, const char validInput[], int validInputLength) {
+char getCharacter(const char * prompt, const char * error) { //, const char validInput[], int validInputLength) {
   char input;
   bool failure;
 
@@ -227,7 +234,7 @@ char getCharacter(const char *prompt, const char* error) { //, const char validI
 
 }
 
-char getCharacter(const char *prompt, const char* error, const char validInput[], int validInputLength) {
+char getCharacter(const char * prompt, const char * error, const char validInput[], int validInputLength) {
   char input;
   bool failure;
 
@@ -316,4 +323,14 @@ void displayResult(const char * secretPhrase, int numberOfGuessesLeft) {
   } else {
     cout << "You did not get it... The phrase was: " << secretPhrase << endl;
   }
+}
+
+void clearScreen() {
+  // system("cls"); // windows
+  system("clear");
+}
+
+void waitForKeyPress() {
+  // system("pause"); // Windows
+  system("read -n 1 -s -p \"Press any key to continue...\";echo");
 }
