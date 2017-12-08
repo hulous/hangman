@@ -2,8 +2,8 @@ CC=g++
 CFLAGS=-I.
 MYAPP = hangman
 DEPS_FOLDER = lib
-DEPS = $(DEPS_FOLDER)/$(MYAPP).hpp
-OBJ = main.o $(DEPS_FOLDER)/$(MYAPP).o
+DEPS = $(DEPS_FOLDER)/Game.hpp $(DEPS_FOLDER)/SecretPhrase.hpp $(DEPS_FOLDER)/Hangman.hpp
+OBJ = main.o $(DEPS_FOLDER)/Game.o $(DEPS_FOLDER)/SecretPhrase.o $(DEPS_FOLDER)/Hangman.o
 
 RM := rm -rf
 
