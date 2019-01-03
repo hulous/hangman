@@ -8,10 +8,11 @@ OBJ = main.o $(DEPS_FOLDER)/Game.o $(DEPS_FOLDER)/SecretPhrase.o $(DEPS_FOLDER)/
 RM := rm -rf
 
 %.o: %.cpp $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) $(STDOPTS) -c -o $@ $< $(CFLAGS)
+
 
 $(MYAPP): $(OBJ)
-	g++ -o $@ $^ $(CFLAGS)
+	$(CC) $(STDOPTS) -o $@ $^ $(CFLAGS)
 
 run:
 	./$(MYAPP)
